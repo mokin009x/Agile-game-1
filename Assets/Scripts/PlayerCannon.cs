@@ -5,6 +5,12 @@ using UnityEngine;
 public class PlayerCannon : MonoBehaviour
 {
     Plane hitField;
+    public GameObject barrle;
+    public GameObject bullet;
+    public float reloadTime;
+    float timer;
+
+
     void Start()
     {
         hitField = new Plane(Vector3.up, transform.position);
@@ -18,5 +24,14 @@ public class PlayerCannon : MonoBehaviour
         {
            transform.LookAt (ray.GetPoint(enter));
         }
+
+        if (Input.GetMouseButtonDown (0) && Time.time > reloadTime + timer)
+        {
+            timer = Time.time + reloadTime;
+
+            Debug.Log("shoot");
+
+        }
+
     }
 }
