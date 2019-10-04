@@ -10,6 +10,9 @@ public class BasicBullet : MonoBehaviour
     public GameObject bulletTip;
     public Vector3 forward;
     public int speed;
+    public int bounceAmount;
+
+    public LayerMask collisionMask;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -18,54 +21,30 @@ public class BasicBullet : MonoBehaviour
 
     void Start()
     {
-        forward = bulletTip.transform.position - transform.position;
-        rb.AddForce(forward.normalized * speed);
+        
+        rb.AddForce(transform.forward * speed);
     }
 
     private void OnCollisionEnter(Collision coll)
     {
-        // top wall
-        if (coll.collider.CompareTag("Finish"))
+        Ray ray = new Ray(transform.position,transform.forward);
+        RaycastHit hit;
+        if (Physics.Raycast(ray,out hit, Vector3.Distance(ray.origin,ray.direction),collisionMask))
         {
             rb.velocity = Vector3.zero;
+            Vector3 reflectDirection = Vector3.Reflect(ray.direction, hit.normal);
+            float rot = 90 - Mathf.Atan2(reflectDirection.z, reflectDirection.x) * Mathf.Rad2Deg;
+            transform.eulerAngles = new Vector3(0,rot,0);
+            rb.AddForce(transform.forward * speed);
+            Debug.DrawRay(ray.origin, ray.direction,Color.red, 20);
 
-            // change movement direction
-            //forward = transform.position - coll.contacts[0].point;
 
-            if (forward.x < 0)
-            {
-                forward.z = forward.z * -1;
-            }
-
-            if (forward.x > 0)
-            {
-                forward.z = forward.z * -1;
-            }
-
-            rb.AddForce(forward.normalized * speed);
-        }
-
-        // side wall
-        if (coll.collider.CompareTag("Respawn"))
-        {
-            rb.velocity = Vector3.zero;
-
-            if (forward.z < 0)
-            {
-                forward.x = forward.x * -1;
-            }
-
-            if (forward.z > 0)
-            {
-                forward.x = forward.x * -1;
-            }
-
-            rb.AddForce(forward.normalized * speed);
         }
     }
 
     // Update is called once per frame
     void Update()
     {
+       
     }
 }
