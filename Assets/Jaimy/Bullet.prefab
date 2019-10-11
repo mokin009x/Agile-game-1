@@ -189,7 +189,7 @@ MonoBehaviour:
   forward: {x: 0, y: 0, z: 0}
   speed: 250
   bounceAmount: 5
-  collisionMask:
+  wallMask:
     serializedVersion: 2
     m_Bits: 512
 --- !u!54 &4813919342838831196

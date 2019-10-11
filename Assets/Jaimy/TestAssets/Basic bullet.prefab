@@ -31,7 +31,7 @@ RectTransform:
   m_GameObject: {fileID: 8695629552824798685}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -55,7 +55,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!114 &8695629552824798683
 MonoBehaviour:
@@ -73,9 +73,9 @@ MonoBehaviour:
   forward: {x: 0, y: 0, z: 0}
   speed: 500
   bounceAmount: 5
-  collisionMask:
+  wallMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
 --- !u!135 &868991406190636039
 SphereCollider:
   m_ObjectHideFlags: 0
