@@ -15,6 +15,7 @@ public class EnemyAi : MonoBehaviour
     public GameObject cannon;
     public GameObject bullet;
     public GameObject target;
+    public GameObject barrel;
     public float distance;
     public float detectionRange;
     public bool canFire;
@@ -48,7 +49,6 @@ public class EnemyAi : MonoBehaviour
     void Start()
     {
         instanceAgent.destination = transform.position;
-        walkRange = 10.0f;
         canFire = true;
         walking = false;
         
@@ -83,8 +83,8 @@ public class EnemyAi : MonoBehaviour
         {
             if (canFire == true)
             {
-                Instantiate(bullet, cannon.transform.position, cannon.transform.rotation);
-                StartCoroutine(FireDelayIE(0.2f));  
+                Instantiate(bullet, barrel.transform.position, barrel.transform.rotation);
+                StartCoroutine(FireDelayIE(2.5f));  
             }
         }
     }
